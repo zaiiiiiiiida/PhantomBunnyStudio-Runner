@@ -303,8 +303,10 @@ MonoBehaviour:
   speed: 20
   lifeTime: 5
   damageAmount: 1
-  impactEffect: {fileID: 8460667080445658512, guid: a3e2c3406e02f2c4ba86cfb1604277bd,
+  impactEffect: {fileID: 1429954232896169633, guid: 83036083a4ebcd34f98131bd3cf6f4d2,
     type: 3}
+  impactEffectOffset: {x: 0, y: -1.53, z: 0}
+  impactEffectRotation: {x: 0, y: 0, z: 0}
 --- !u!54 &-2112551788965035401
 Rigidbody:
   m_ObjectHideFlags: 0

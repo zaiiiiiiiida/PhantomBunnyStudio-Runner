@@ -5,8 +5,6 @@ public class AIEnemy : MonoBehaviour
 {
     [Header("Enemy Properties")]
     public string playerTag = "Player"; // Tag to find the player
-    public string obstacleTag = "Obstacle"; // Tag to identify obstacles
-    private Transform player;
     public float minChaseSpeed = 5.0f; // Minimum chase speed
     public float maxChaseSpeed = 7.5f; // Maximum chase speed
     public float minFollowDistance = 1f; // Minimum follow distance
@@ -22,7 +20,6 @@ public class AIEnemy : MonoBehaviour
     public float needleSpawnIntervalMax = 2.5f; // Maximum interval between shooting needles
     public GameObject needlePrefab; // Prefab for the needle
     public Transform spawnPoint; // Spawn point for the needle
-    public float needleSpawnDistance = 1.0f; // Distance from enemy to spawn needle
 
     [Header("Timers")]
     public float timerMaxChaseStart = 5f; // Time before the enemy starts increasing speed
@@ -35,6 +32,7 @@ public class AIEnemy : MonoBehaviour
     private float currentStamina;
 
     private Animator anim;
+    private Transform player;
     private PlayerHealth playerHealth;
     private PlayerController playerController;
     private float currentChaseSpeed;
@@ -51,12 +49,6 @@ public class AIEnemy : MonoBehaviour
 
     void Start()
     {
-        playerHealth = FindAnyObjectByType<PlayerHealth>();
-        if (playerHealth == null)
-        {
-            Debug.Log("PlayerHealthScript not found");
-        }
-
         anim = GetComponent<Animator>();
         if (anim == null)
         {
@@ -73,7 +65,8 @@ public class AIEnemy : MonoBehaviour
     public void Initialize(Transform playerTransform)
     {
         player = playerTransform;
-        playerController = FindAnyObjectByType<PlayerController>();
+        playerHealth = playerTransform.GetComponent<PlayerHealth>();
+        playerController = playerTransform.GetComponent<PlayerController>();
     }
 
     void Update()
@@ -95,17 +88,12 @@ public class AIEnemy : MonoBehaviour
 
     private void FollowPlayer()
     {
-        int playerLane = 1; // Default to middle lane
-        if (player.position.x < -laneDistance / 2)
-        {
-            playerLane = 0; // Left lane
-        }
-        else if (player.position.x > laneDistance / 2)
-        {
-            playerLane = 2; // Right lane
-        }
+        int playerLane = Mathf.RoundToInt((player.position.x + laneDistance / 2) / laneDistance);
 
-        Vector3 targetPosition = new Vector3((playerLane - 1) * laneDistance, transform.position.y, player.position.z - currentFollowDistance);
+        // Clamp player lane to valid values
+        playerLane = Mathf.Clamp(playerLane, 0, 2);
+
+        Vector3 targetPosition = new Vector3(playerLane * laneDistance - laneDistance / 2, transform.position.y, player.position.z - currentFollowDistance);
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, currentChaseSpeed * Time.deltaTime);
 
         if (anim != null)
@@ -227,28 +215,28 @@ public class AIEnemy : MonoBehaviour
         }
     }
 
+
     private void Die()
     {
-        if (playerController != null)
-        {
-            playerController.OnEnemyDeath();
-        }
+        anim.SetTrigger("Die");
 
-        playerCanAttack = false;
-
-        if (anim != null)
-        {
-            anim.SetTrigger("Die");
-        }
-
-        // Play death particle effect if available
+        // Play the death particle effect
         if (deathParticleEffect != null)
         {
             Instantiate(deathParticleEffect, transform.position, Quaternion.identity);
         }
 
-        // Optionally, disable the enemy game object after a delay to allow the death animation to play
-        StartCoroutine(DisableAfterDelay(1.0f)); // 1 second delay as an example
+        // Destroy the enemy object after a delay
+        Destroy(gameObject, 1.5f);
+    }
+
+    // Method to handle player revival
+    public void OnPlayerRevived()
+    {
+        if (anim != null)
+        {
+            anim.SetTrigger("RunForward");
+        }
     }
 
     private IEnumerator DisableAfterDelay(float delay)

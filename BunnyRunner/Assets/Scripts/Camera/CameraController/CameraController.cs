@@ -84,6 +84,7 @@ public class CameraController : MonoBehaviour
             {
                 playerController.ReverseControls();
             }
+            waitingTimeSlider.gameObject.SetActive(false);
 
             InstantiateEnemy();
 

@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class PlayerHealth : MonoBehaviour
     private PlayerController playerController;
     private Animator anim;
     private CameraShake cameraShake;
+    public GameObject gameOverPanel;
+    public Button reviveButton; // Button to trigger revive
 
     void Start()
     {
@@ -24,13 +27,18 @@ public class PlayerHealth : MonoBehaviour
         {
             Debug.Log("Camera shake script not found!");
         }
+
+        // Add listener to the revive button
+        if (reviveButton != null)
+        {
+            reviveButton.onClick.AddListener(Revive);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Obstacle"))
         {
-            
             StartCoroutine(HandleObstacleCollision(other.gameObject));
         }
     }
@@ -39,7 +47,6 @@ public class PlayerHealth : MonoBehaviour
     {
         TakeDamage();
 
-        
         if (damageEffectPrefab != null)
         {
             GameObject damageEffect = Instantiate(damageEffectPrefab, obstacle.transform.position, Quaternion.identity);
@@ -73,7 +80,11 @@ public class PlayerHealth : MonoBehaviour
             // Stop player movement and perform game over logic
             playerController.enabled = false;
             anim.SetTrigger("Die");
-            // You can add further game over logic here
+            gameOverPanel.SetActive(true);
+            if (reviveButton != null)
+            {
+                reviveButton.gameObject.SetActive(true);
+            }
         }
         else
         {
@@ -82,9 +93,33 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    public void Revive()
+    {
+        // Restore health
+        currentHealth = maxHealth;
+
+        // Re-enable player movement
+        playerController.enabled = true;
+        anim.ResetTrigger("Die");
+        anim.SetTrigger("Revive");
+
+        // Hide game over panel and revive button
+        gameOverPanel.SetActive(false);
+        if (reviveButton != null)
+        {
+            reviveButton.gameObject.SetActive(false);
+        }
+
+        // Notify all enemies about the player revival
+        AIEnemy[] enemies = FindObjectsOfType<AIEnemy>();
+        foreach (AIEnemy enemy in enemies)
+        {
+            enemy.OnPlayerRevived();
+        }
+    }
+
     public int GetCurrentHealth()
     {
         return currentHealth;
     }
 }
-
