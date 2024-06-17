@@ -1081,6 +1081,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 654725309}
+  - component: {fileID: 654725310}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1103,6 +1104,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &654725310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 654725307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f00e844097826c4294eaba05a3cdc58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerController: {fileID: 1292549076}
+  enemyScript: {fileID: 6560731044049326014, guid: d8be586001a6bdc41b057e356a8076f9,
+    type: 3}
+  winnerPanel: {fileID: 496035300}
 --- !u!1 &676146092
 GameObject:
   m_ObjectHideFlags: 0
@@ -2396,6 +2413,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1292549076 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3243029111085672612, guid: 1f03fffd4ba7f5241bc40d4cd4e8ce37,
+    type: 3}
+  m_PrefabInstance: {fileID: 7294972412263312861}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38d28916ef1a89f4d95ea6dcb076bf6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1352047682
 GameObject:
   m_ObjectHideFlags: 0
@@ -2902,9 +2931,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameOverPanel: {fileID: 0}
   target: {fileID: 1230584919}
+  winnerPanel: {fileID: 496035300}
   startingText: {fileID: 0}
   newRecordPanel: {fileID: 0}
-  scoreText: {fileID: 1879520920}
+  scoreText: {fileID: 1117495094}
+  inGameLootText: {fileID: 1117495094}
+  finalScoreLootText: {fileID: 1879520920}
 --- !u!4 &1650951292
 Transform:
   m_ObjectHideFlags: 0
@@ -3196,7 +3228,7 @@ PrefabInstance:
     - target: {fileID: 7398368600903675480, guid: 1f03fffd4ba7f5241bc40d4cd4e8ce37,
         type: 3}
       propertyPath: maxHealth
-      value: 1
+      value: 186
       objectReference: {fileID: 0}
     - target: {fileID: 7398368600903675480, guid: 1f03fffd4ba7f5241bc40d4cd4e8ce37,
         type: 3}

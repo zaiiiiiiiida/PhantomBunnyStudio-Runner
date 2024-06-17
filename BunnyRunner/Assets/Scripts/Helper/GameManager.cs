@@ -1,29 +1,50 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject enemyPrefab; // Reference to the enemy prefab
-    public Transform player; // Reference to the player transform
-    public float spawnDistance = 10f; // Distance behind the player to spawn the enemy
+    public PlayerController playerController;
+    public AIEnemy enemyScript;
+    public GameObject winnerPanel;
+
+    private bool isGameOver = false;
 
     void Start()
     {
-        // Check if the player reference is set
-        if (player == null)
+        if (enemyScript != null)
         {
-            Debug.LogError("Player reference is not set in the GameManager!");
-            return;
+            enemyScript.OnEnemyDeath += HandleEnemyDeath;
         }
 
-        // Check if the enemy prefab reference is set
-        if (enemyPrefab == null)
+        if (winnerPanel != null)
         {
-            Debug.LogError("Enemy prefab reference is not set in the GameManager!");
-            return;
+            winnerPanel.SetActive(false);
         }
+    }
 
-        // Instantiate the enemy prefab behind the player
-        Vector3 spawnPosition = player.position - player.forward * spawnDistance;
-        Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+    private void HandleEnemyDeath()
+    {
+        if (isGameOver)
+            return;
+
+        isGameOver = true;
+
+        // Declare the player as the winner
+        playerController.enabled = false; // Disable player movement
+        playerController.anim.SetTrigger("Dance"); // Set dance animation
+
+        // Show the winner panel
+        if (winnerPanel != null)
+        {
+            winnerPanel.SetActive(true);
+        }
+    }
+
+    void OnDestroy()
+    {
+        if (enemyScript != null)
+        {
+            enemyScript.OnEnemyDeath -= HandleEnemyDeath;
+        }
     }
 }

@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public float maxSpeed;
     public float lateralMoveSpeed = 10.0f;
 
-    private int desiredLane = 1; // 0:left, 1:middle, 2:right
+    public int desiredLane = 1; // 0:left, 1:middle, 2:right
     public float laneDistance = 2.5f;
 
     public float gravity = -20f;
@@ -25,27 +25,23 @@ public class PlayerController : MonoBehaviour
     bool toggle = false;
 
     [Header("AnimationSettings")]
-    Animator anim;
-
-    private bool isCameraReversed = false; // Flag to determine if camera is reversed
-
-    // Assume there is a health system in place
+    public Animator anim;
+    private bool isCameraReversed = false;
     public int health = 100;
-
-    // Reference to the enemy's transform
     public Transform enemyTransform;
-
-    // Reference to the AIEnemy script
     private AIEnemy enemyScript;
-
-    // Reference to the attack button
     public Button attackButton;
-
+    private PlayerManager playerManager;
     void Start()
     {
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
         Time.timeScale = 1.2f;
+        playerManager = FindObjectOfType<PlayerManager>();
+        if (playerManager != null)
+        {
+            Debug.Log("PlayerManager is found");
+        }
 
         // Add listener to the attack button
         if (attackButton != null)
@@ -193,7 +189,7 @@ public class PlayerController : MonoBehaviour
         isCameraReversed = !isCameraReversed;
     }
 
-   
+
     private void UpdateAttackButtonVisibility(bool canAttack)
     {
         if (attackButton != null)
@@ -230,4 +226,20 @@ public class PlayerController : MonoBehaviour
             attackButton.gameObject.SetActive(false);
         }
     }
+
+    public void OnEnemyDefeated()
+    {
+        // Stop player movement
+        forwardSpeed = 0f;
+
+        // Trigger the "Dance" animation
+        anim.SetTrigger("Dance");
+
+        // Show the winner pop-up
+        if (playerManager != null)
+        {
+            playerManager.ShowWinnerPopup();
+        }
+    }
 }
+

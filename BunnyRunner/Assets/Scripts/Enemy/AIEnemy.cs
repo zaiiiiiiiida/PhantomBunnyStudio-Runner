@@ -47,6 +47,8 @@ public class AIEnemy : MonoBehaviour
     [Header("Effects")]
     public GameObject deathParticleEffect; // Particle effect to play on death
 
+    public event System.Action OnEnemyDeath;
+
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -88,17 +90,22 @@ public class AIEnemy : MonoBehaviour
 
     private void FollowPlayer()
     {
-        int playerLane = Mathf.RoundToInt((player.position.x + laneDistance / 2) / laneDistance);
-
-        // Clamp player lane to valid values
-        playerLane = Mathf.Clamp(playerLane, 0, 2);
-
-        Vector3 targetPosition = new Vector3(playerLane * laneDistance - laneDistance / 2, transform.position.y, player.position.z - currentFollowDistance);
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, currentChaseSpeed * Time.deltaTime);
-
-        if (anim != null)
+        // Use the player's desired lane from PlayerController
+        if (playerController != null)
         {
-            anim.SetTrigger("RunForward");
+            int playerLane = playerController.desiredLane;
+
+            // Calculate the target position for the enemy
+            Vector3 targetPosition = new Vector3((playerLane - 1) * laneDistance, transform.position.y, player.position.z - currentFollowDistance);
+
+            // Move the enemy towards the target position
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, currentChaseSpeed * Time.deltaTime);
+
+            // Trigger the run animation
+            if (anim != null)
+            {
+                anim.SetTrigger("RunForward");
+            }
         }
     }
 
@@ -215,10 +222,18 @@ public class AIEnemy : MonoBehaviour
         }
     }
 
-
     private void Die()
     {
         anim.SetTrigger("Die");
+
+        // Notify subscribers that the enemy has died
+        OnEnemyDeath?.Invoke();
+
+        // Notify the PlayerController of the enemy's death
+        if (playerController != null)
+        {
+            playerController.OnEnemyDefeated();
+        }
 
         // Play the death particle effect
         if (deathParticleEffect != null)
@@ -226,7 +241,6 @@ public class AIEnemy : MonoBehaviour
             Instantiate(deathParticleEffect, transform.position, Quaternion.identity);
         }
 
-        // Destroy the enemy object after a delay
         Destroy(gameObject, 1.5f);
     }
 
