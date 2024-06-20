@@ -51,6 +51,8 @@ public class AIEnemy : MonoBehaviour
 
     public event System.Action OnEnemyDeath;
 
+    private bool isTakingDamage = false; // Flag to indicate if the enemy is taking damage
+
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -80,7 +82,7 @@ public class AIEnemy : MonoBehaviour
         playerController = playerTransform.GetComponent<PlayerController>();
     }
 
-    void Update()
+    void LateUpdate()
     {
         if (player != null && playerHealth != null && playerHealth.GetCurrentHealth() > 0)
         {
@@ -168,9 +170,9 @@ public class AIEnemy : MonoBehaviour
     {
         while (true)
         {
-            if (playerHealth == null || playerHealth.GetCurrentHealth() <= 0)
+            if (playerHealth == null || playerHealth.GetCurrentHealth() <= 0 || isTakingDamage)
             {
-                yield break; // Exit the coroutine if player's health is 0
+                yield break; // Exit the coroutine if player's health is 0 or the enemy is taking damage
             }
 
             float needleSpawnInterval = Mathf.Lerp(needleSpawnIntervalMax, needleSpawnIntervalMin, (currentFollowDistance - minFollowDistance) / (maxFollowDistance - minFollowDistance));
@@ -181,7 +183,7 @@ public class AIEnemy : MonoBehaviour
 
     private void AIThrowObject()
     {
-        if (needlePrefab != null && spawnPoint != null)
+        if (!isTakingDamage && needlePrefab != null && spawnPoint != null)
         {
             Instantiate(needlePrefab, spawnPoint.position, spawnPoint.rotation);
 
@@ -225,6 +227,8 @@ public class AIEnemy : MonoBehaviour
         health -= damage;
         anim.SetTrigger("TakeDamage");
         health = Mathf.Clamp(health, 0, int.MaxValue);
+        isTakingDamage = true; // Set the flag when taking damage
+
         if (health <= 0)
         {
             Die();
@@ -232,13 +236,23 @@ public class AIEnemy : MonoBehaviour
         else
         {
             PlayDamageEffect();
+            StartCoroutine(ResetTakingDamage()); // Start a coroutine to reset the flag
         }
+    }
+
+    private IEnumerator ResetTakingDamage()
+    {
+        yield return new WaitForSeconds(0.5f); // Adjust the delay based on your damage animation duration
+        isTakingDamage = false; // Reset the flag
     }
 
     private void PlayDamageEffect()
     {
         if (damageParticleSystem != null)
         {
+            // Clear the particle system to reset its state
+            damageParticleSystem.Clear();
+            
             damageParticleSystem.Play();
         }
     }
