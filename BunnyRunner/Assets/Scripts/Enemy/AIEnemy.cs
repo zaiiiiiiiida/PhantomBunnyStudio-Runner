@@ -46,6 +46,8 @@ public class AIEnemy : MonoBehaviour
 
     [Header("Effects")]
     public GameObject deathParticleEffect; // Particle effect to play on death
+    public GameObject damageParticleEffect; // Particle effect to play on damage
+    private ParticleSystem damageParticleSystem; // Reference to the damage particle system
 
     public event System.Action OnEnemyDeath;
 
@@ -62,6 +64,13 @@ public class AIEnemy : MonoBehaviour
         currentStamina = maxStamina;
         StartCoroutine(AdjustSpeedAndFollowDistance());
         StartCoroutine(ThrowNeedles());
+
+        // Get the damage particle system component
+        damageParticleSystem = damageParticleEffect.GetComponent<ParticleSystem>();
+        if (damageParticleSystem == null)
+        {
+            Debug.LogError("Damage Particle Effect does not have ParticleSystem component attached!");
+        }
     }
 
     public void Initialize(Transform playerTransform)
@@ -219,6 +228,18 @@ public class AIEnemy : MonoBehaviour
         if (health <= 0)
         {
             Die();
+        }
+        else
+        {
+            PlayDamageEffect();
+        }
+    }
+
+    private void PlayDamageEffect()
+    {
+        if (damageParticleSystem != null)
+        {
+            damageParticleSystem.Play();
         }
     }
 
