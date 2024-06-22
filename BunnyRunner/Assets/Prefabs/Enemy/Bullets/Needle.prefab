@@ -29,9 +29,10 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.094903, y: 0.094903, z: 0.094903}
+  m_LocalScale: {x: 0.076091416, y: 0.0049658944, z: 0.3237202}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4031417026344415167}
   m_Father: {fileID: 221436034828809196}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4909824479665510646
@@ -59,10 +60,12 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fa87bbc54eccf9e43b4e03d185226759, type: 2}
+  - {fileID: 2100000, guid: aa7a71e33a52d8c439dbe20272eed588, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -134,10 +137,10 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 46.398365, y: 201.3736, z: 15.787061}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 221436034828809196}
+  m_Father: {fileID: 1527154128068945295}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!96 &5793780055859966995
 TrailRenderer:
@@ -157,10 +160,12 @@ TrailRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fa87bbc54eccf9e43b4e03d185226759, type: 2}
+  - {fileID: 2100000, guid: aa7a71e33a52d8c439dbe20272eed588, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -191,7 +196,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.168993
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -199,7 +204,16 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.27212024
+        time: 0.26716474
+        value: 0.6638667
+        inSlope: 0.033231482
+        outSlope: 0.033231482
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.86426383
+      - serializedVersion: 3
+        time: 0.5095165
         value: 0
         inSlope: 0
         outSlope: 0
@@ -212,15 +226,15 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.3372549, g: 0.5803922, b: 0.6117647, a: 0.6}
-      key1: {r: 0.3372549, g: 0.5803922, b: 0.6117647, a: 0.6}
+      key0: {r: 0, g: 0.20000005, b: 1, a: 1}
+      key1: {r: 0.8214226, g: 0, b: 1, a: 1}
       key2: {r: 1, g: 0.9372549, b: 0.21960784, a: 0}
       key3: {r: 1, g: 0.8039216, b: 0, a: 0}
       key4: {r: 1, g: 0.46666667, b: 0, a: 0}
       key5: {r: 0.78039217, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
-      ctime0: 0
+      ctime0: 77
       ctime1: 65535
       ctime2: 13685
       ctime3: 25443
@@ -240,8 +254,8 @@ TrailRenderer:
       m_ColorSpace: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
-    numCornerVertices: 0
-    numCapVertices: 11
+    numCornerVertices: 70
+    numCapVertices: 55
     alignment: 0
     textureMode: 0
     textureScale: {x: 1, y: 1}
@@ -280,12 +294,11 @@ Transform:
   m_GameObject: {fileID: 4491998400456827820}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.045, z: -0.191}
+  m_LocalPosition: {x: 0, y: 0, z: 0.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1527154128068945295}
-  - {fileID: 4031417026344415167}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &57827508136085713
@@ -300,10 +313,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f22e19457627bf3449d90cb381c4a829, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  speed: 18.6
   lifeTime: 5
   damageAmount: 1
-  impactEffect: {fileID: 1429954232896169633, guid: 83036083a4ebcd34f98131bd3cf6f4d2,
+  impactEffect: {fileID: 5112403345868107898, guid: 6f34ef0d986e9db4199cf75805f79753,
     type: 3}
   impactEffectOffset: {x: 0, y: -1.53, z: 0}
   impactEffectRotation: {x: 0, y: 0, z: 0}
@@ -353,5 +366,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.71, y: 0.29, z: 0.27}
+  m_Size: {x: 0.25, y: 0.53, z: 0.27}
   m_Center: {x: 0, y: 0, z: 0}

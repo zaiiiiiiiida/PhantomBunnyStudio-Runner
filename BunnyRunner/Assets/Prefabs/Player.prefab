@@ -600,10 +600,15 @@ MonoBehaviour:
   forwardSpeed: 9.73
   maxSpeed: 4.74
   lateralMoveSpeed: 4.14
+  desiredLane: 1
   laneDistance: 2.5
   gravity: -12
   jumpHeight: 2
   slideDuration: 1.4
+  anim: {fileID: 0}
+  health: 100
+  enemyTransform: {fileID: 0}
+  attackButton: {fileID: 0}
 --- !u!136 &7867058943762582501
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -629,7 +634,7 @@ CapsuleCollider:
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &3155300109328329582
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -643,6 +648,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -663,6 +669,8 @@ MonoBehaviour:
   maxHealth: 3
   damageEffectPrefab: {fileID: 6813416509558619124, guid: 3b7f2c753d435d647a80f1f047a113e3,
     type: 3}
+  gameOverPanel: {fileID: 0}
+  reviveButton: {fileID: 0}
 --- !u!1 &2125632388544685804
 GameObject:
   m_ObjectHideFlags: 0
@@ -1835,6 +1843,8 @@ SkinnedMeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 3
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
