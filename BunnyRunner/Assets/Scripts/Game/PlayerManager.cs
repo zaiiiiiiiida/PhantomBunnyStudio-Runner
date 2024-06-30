@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -16,14 +17,13 @@ public class PlayerManager : MonoBehaviour
 
     private Vector3 targetPosition;
     private static int totalScore;
-    private int currentEarnedScore; // Track the current session's earned score
+    private int currentEarnedScore; 
     public Text scoreText;
-
-    // References to loot text UI elements
     public Text inGameLootText;
     public Text finalScoreLootText;
 
-    // Public list of Text elements to display the total score
+
+    
     public List<Text> totalScoreTextElements;
 
     private void Awake()
@@ -33,7 +33,7 @@ public class PlayerManager : MonoBehaviour
 
     void Start()
     {
-        totalScore = PlayerPrefs.GetInt("TotalScore", 0); // Load the total score when the game starts
+        totalScore = PlayerPrefs.GetInt("TotalScore", 0); 
         currentEarnedScore = 0;
         Time.timeScale = 1;
         UpdateTotalScoreUI(); // Update the UI with the loaded total score
@@ -98,6 +98,17 @@ public class PlayerManager : MonoBehaviour
         if (winnerPanel != null)
         {
             winnerPanel.SetActive(true);
+            UnlockNewLevel();
+
+        }
+    }
+    void UnlockNewLevel()
+    {
+        if(SceneManager.GetActiveScene().buildIndex >= PlayerPrefs.GetInt("ReachedIndex"))
+        {
+            PlayerPrefs.SetInt("ReachedIndex", SceneManager.GetActiveScene().buildIndex + 1);
+            PlayerPrefs.SetInt("UnlockedLevel", PlayerPrefs.GetInt("UnlockedLevel", 1));
+            PlayerPrefs.Save();
         }
     }
 
@@ -149,4 +160,10 @@ public class PlayerManager : MonoBehaviour
             }
         }
     }
+
+    public void GoToMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
 }
