@@ -222,7 +222,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: PlayerRevived
+    m_ConditionEvent: RunForward
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 7255712488246514511}
@@ -674,7 +674,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 7255712488246514511}
-    m_Position: {x: 250, y: 50, z: 0}
+    m_Position: {x: 320, y: 20, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1356949674802104745}
     m_Position: {x: 580, y: 210, z: 0}
@@ -689,7 +689,7 @@ AnimatorStateMachine:
     m_Position: {x: -2221.0374, y: -1884.2556, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2681523443226868339}
-    m_Position: {x: 260, y: 520, z: 0}
+    m_Position: {x: 660, y: 640, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8684758032641788337}
     m_Position: {x: 260, y: 420, z: 0}

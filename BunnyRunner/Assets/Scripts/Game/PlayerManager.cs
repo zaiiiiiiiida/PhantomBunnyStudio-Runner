@@ -17,26 +17,47 @@ public class PlayerManager : MonoBehaviour
 
     private Vector3 targetPosition;
     private static int totalScore;
-    private int currentEarnedScore; 
+    private int currentEarnedScore;
     public Text scoreText;
     public Text inGameLootText;
     public Text finalScoreLootText;
-
-
-    
+    public List<Button> DoubleCarrotButtons; // Changed to List<Button>
     public List<Text> totalScoreTextElements;
+    AdsManager adManager;
+    // Background music variables
+    public AudioSource bgMusicSource; // Reference to the AudioSource component for background music
+    public AudioClip bgMusicClip; // Background music audio clip
 
     private void Awake()
     {
         targetPosition = target.position;
+        adManager = FindAnyObjectByType<AdsManager>();
     }
 
     void Start()
     {
-        totalScore = PlayerPrefs.GetInt("TotalScore", 0); 
+        totalScore = PlayerPrefs.GetInt("TotalScore", 0);
         currentEarnedScore = 0;
         Time.timeScale = 1;
         UpdateTotalScoreUI(); // Update the UI with the loaded total score
+
+        // Initialize background music
+        if (bgMusicClip != null)
+        {
+            bgMusicSource = gameObject.AddComponent<AudioSource>(); // Add AudioSource if not already present
+            bgMusicSource.clip = bgMusicClip;
+            bgMusicSource.loop = true; // Loop the background music
+            bgMusicSource.Play(); // Start playing background music
+        }
+
+        // Add event listeners to all DoubleCarrotButtons
+        foreach (Button button in DoubleCarrotButtons)
+        {
+            if (button != null)
+            {
+                button.onClick.AddListener(adManager.ShowRewardedAdDoubleScore);
+            }
+        }
     }
 
     void Update()
@@ -99,12 +120,12 @@ public class PlayerManager : MonoBehaviour
         {
             winnerPanel.SetActive(true);
             UnlockNewLevel();
-
         }
     }
+
     void UnlockNewLevel()
     {
-        if(SceneManager.GetActiveScene().buildIndex >= PlayerPrefs.GetInt("ReachedIndex"))
+        if (SceneManager.GetActiveScene().buildIndex >= PlayerPrefs.GetInt("ReachedIndex"))
         {
             PlayerPrefs.SetInt("ReachedIndex", SceneManager.GetActiveScene().buildIndex + 1);
             PlayerPrefs.SetInt("UnlockedLevel", PlayerPrefs.GetInt("UnlockedLevel", 1));
@@ -122,7 +143,6 @@ public class PlayerManager : MonoBehaviour
         UpdateTotalScoreUI(); // Update the UI with the new total score
         Debug.Log("Doubled Earned Score: " + doubledScore); // Log for demonstration
         SaveScore(); // Save the updated scores after doubling
-        // You can perform any additional actions with doubledScore here
     }
 
     // Save scores to PlayerPrefs
@@ -166,4 +186,12 @@ public class PlayerManager : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
+    // Stop background music when the game is over
+    private void OnDestroy()
+    {
+        if (bgMusicSource != null)
+        {
+            bgMusicSource.Stop();
+        }
+    }
 }

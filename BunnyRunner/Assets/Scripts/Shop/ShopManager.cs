@@ -14,32 +14,47 @@ public class ShopManager : MonoBehaviour
     public Button playButton;
     public Button buyButton;
 
+    public AudioSource audioSource; // Reference to the AudioSource component
+    public AudioClip changeSound; // Sound clip for character change
+    public AudioClip backgroundMusic; // Background music clip
+
     private void Start()
-    {   foreach(CharacterBlueprint characterBlueprint in characterBlueprints)
+    {
+        audioSource = GetComponent<AudioSource>(); // Get the AudioSource component
+        if (audioSource == null)
         {
-            if(characterBlueprint.price == 0)
+            audioSource = gameObject.AddComponent<AudioSource>(); // Add AudioSource if not already present
+        }
+
+        // Play background music
+        if (backgroundMusic != null)
+        {
+            audioSource.clip = backgroundMusic;
+            audioSource.loop = true; // Loop the background music
+            audioSource.Play();
+        }
+
+        foreach (CharacterBlueprint characterBlueprint in characterBlueprints)
+        {
+            if (characterBlueprint.price == 0)
             {
                 characterBlueprint.isUnlocked = true;
             }
             else
             {
-                characterBlueprint.isUnlocked = PlayerPrefs.GetInt(characterBlueprint.name, 0) == 0 ? false: true;
+                characterBlueprint.isUnlocked = PlayerPrefs.GetInt(characterBlueprint.name, 0) == 1 ? true : false;
             }
-
-            
         }
 
         totalScore = PlayerPrefs.GetInt("TotalScore", 0);
         totalScoreText.text = totalScore.ToString();
         currentCharacterIndex = PlayerPrefs.GetInt("SelectedCharacter", 0);
-        foreach (GameObject character in characters) 
+        foreach (GameObject character in characters)
         {
             character.SetActive(false);
         }
         characters[currentCharacterIndex].SetActive(true);
     }
-
-
 
     private void Update()
     {
@@ -48,26 +63,29 @@ public class ShopManager : MonoBehaviour
 
     public void ChangeNext()
     {
+        PlayChangeSound(); // Play the change sound
+
         characters[currentCharacterIndex].SetActive(false);
         currentCharacterIndex++;
-        if(currentCharacterIndex == characters.Length) 
-        { 
+        if (currentCharacterIndex == characters.Length)
+        {
             currentCharacterIndex = 0;
         }
         characters[currentCharacterIndex].SetActive(true);
 
         CharacterBlueprint ch = characterBlueprints[currentCharacterIndex];
-        if(!ch.isUnlocked) 
+        if (!ch.isUnlocked)
         {
             return;
         }
 
-
         PlayerPrefs.SetInt("SelectedCharacter", currentCharacterIndex);
-
     }
+
     public void ChangePrevious()
     {
+        PlayChangeSound(); // Play the change sound
+
         characters[currentCharacterIndex].SetActive(false);
         currentCharacterIndex--;
         if (currentCharacterIndex == -1)
@@ -84,10 +102,11 @@ public class ShopManager : MonoBehaviour
 
         PlayerPrefs.SetInt("SelectedCharacter", currentCharacterIndex);
     }
+
     private void UpdateUI()
     {
         CharacterBlueprint ch = characterBlueprints[currentCharacterIndex];
-        if(ch.isUnlocked)
+        if (ch.isUnlocked)
         {
             buyButton.gameObject.SetActive(false);
             playButton.gameObject.SetActive(true);
@@ -105,10 +124,11 @@ public class ShopManager : MonoBehaviour
             }
             else
             {
-                buyButton.interactable = true; 
+                buyButton.interactable = true;
             }
         }
     }
+
     public void UnlockCharacter()
     {
         CharacterBlueprint ch = characterBlueprints[currentCharacterIndex];
@@ -117,9 +137,13 @@ public class ShopManager : MonoBehaviour
         PlayerPrefs.SetInt("SelectedCharacter", currentCharacterIndex);
         ch.isUnlocked = true;
         PlayerPrefs.SetInt("TotalScore", PlayerPrefs.GetInt("TotalScore", 0) - ch.price);
-
-
     }
 
-
+    private void PlayChangeSound()
+    {
+        if (audioSource != null && changeSound != null)
+        {
+            audioSource.PlayOneShot(changeSound);
+        }
+    }
 }

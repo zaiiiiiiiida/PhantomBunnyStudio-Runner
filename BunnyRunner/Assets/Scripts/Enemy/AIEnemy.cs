@@ -49,6 +49,11 @@ public class AIEnemy : MonoBehaviour
     public GameObject damageParticleEffect; // Particle effect to play on damage
     private ParticleSystem damageParticleSystem; // Reference to the damage particle system
 
+    [Header("Audio")]
+    public AudioSource audioSource; // Reference to the AudioSource component
+    public AudioClip attackSound; // Sound clip for attack
+    public AudioClip runSound; // Sound clip for running
+
     public event System.Action OnEnemyDeath;
 
     private bool isTakingDamage = false; // Flag to indicate if the enemy is taking damage
@@ -59,6 +64,19 @@ public class AIEnemy : MonoBehaviour
         if (anim == null)
         {
             Debug.LogError("Animator not found! Please add an Animator component to the enemy GameObject.");
+        }
+
+        // Get the AudioSource component
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>(); // Add AudioSource if not already present
+        }
+
+        // Load the attack sound
+        if (attackSound == null)
+        {
+            Debug.LogError("Attack sound not assigned!");
         }
 
         currentChaseSpeed = maxChaseSpeed;
@@ -116,6 +134,12 @@ public class AIEnemy : MonoBehaviour
             if (anim != null)
             {
                 anim.SetTrigger("RunForward");
+            }
+
+            // Play run sound
+            if (audioSource != null && runSound != null && !audioSource.isPlaying)
+            {
+                audioSource.PlayOneShot(runSound);
             }
         }
     }
@@ -187,6 +211,12 @@ public class AIEnemy : MonoBehaviour
         {
             Instantiate(needlePrefab, spawnPoint.position, spawnPoint.rotation);
 
+            // Play attack sound
+            if (audioSource != null && attackSound != null)
+            {
+                audioSource.PlayOneShot(attackSound);
+            }
+
             if (anim != null)
             {
                 anim.SetTrigger("RunAttack");
@@ -252,7 +282,7 @@ public class AIEnemy : MonoBehaviour
         {
             // Clear the particle system to reset its state
             damageParticleSystem.Clear();
-            
+
             damageParticleSystem.Play();
         }
     }
@@ -286,6 +316,9 @@ public class AIEnemy : MonoBehaviour
         {
             anim.SetTrigger("RunForward");
         }
+
+        // Restart the ThrowNeedles coroutine
+        StartCoroutine(ThrowNeedles());
     }
 
     private IEnumerator DisableAfterDelay(float delay)

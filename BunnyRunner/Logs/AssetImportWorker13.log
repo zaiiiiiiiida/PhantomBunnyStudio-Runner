@@ -15,7 +15,7 @@ C:/Users/zaida/OneDrive/Documents/GitHub/PhantomBunnyStudio-Runner/BunnyRunner
 -logFile
 Logs/AssetImportWorker13.log
 -srvPort
-54412
+64095
 -job-worker-count
 7
 -background-job-worker-count
@@ -58,12 +58,12 @@ C:/Users/zaida/OneDrive/Documents/GitHub/PhantomBunnyStudio-Runner/BunnyRunner
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [11224] Host "[IP] 192.168.0.12 [Port] 0 [Flags] 2 [Guid] 1972772690 [EditorId] 1972772690 [Version] 1048832 [Id] WindowsEditor(7,Zaida) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
-Player connection [11224] Host "[IP] 192.168.0.12 [Port] 0 [Flags] 2 [Guid] 1972772690 [EditorId] 1972772690 [Version] 1048832 [Id] WindowsEditor(7,Zaida) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [11912] Host "[IP] 192.168.0.12 [Port] 0 [Flags] 2 [Guid] 3832337051 [EditorId] 3832337051 [Version] 1048832 [Id] WindowsEditor(7,Zaida) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+Player connection [11912] Host "[IP] 192.168.0.12 [Port] 0 [Flags] 2 [Guid] 3832337051 [EditorId] 3832337051 [Version] 1048832 [Id] WindowsEditor(7,Zaida) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
 JobSystem: Creating JobQueue using job-worker-count value 7
 [Physics::Module] Initialized MultithreadedJobDispatcher with 7 workers.
 Library Redirect Path: Library/
-Refreshing native plugins compatible for Editor in 5.04 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 5.02 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2023.2.20f1 (0e25a174756c)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/Unity 2023.2.20f1/Editor/Data/Resources/UnitySubsystems
@@ -79,46 +79,46 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/Unity 2023.2.20f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/Unity 2023.2.20f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/Unity 2023.2.20f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56668
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56400
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/Unity 2023.2.20f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/Unity 2023.2.20f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
-Registered in 0.003880 seconds.
-- Loaded All Assemblies, in  0.463 seconds
+Registered in 0.007886 seconds.
+- Loaded All Assemblies, in  0.532 seconds
 Native extension for Android target not found
-Android Extension - Scanning For ADB Devices 230 ms
+Android Extension - Scanning For ADB Devices 304 ms
 Native extension for WindowsStandalone target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.621 seconds
-Domain Reload Profiling: 1079ms
-	BeginReloadAssembly (168ms)
+- Finished resetting the current domain, in  0.731 seconds
+Domain Reload Profiling: 1257ms
+	BeginReloadAssembly (189ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (0ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
 		CreateAndSetChildDomain (1ms)
-	RebuildCommonClasses (39ms)
-	RebuildNativeTypeToScriptingClass (12ms)
-	initialDomainReloadingComplete (54ms)
-	LoadAllAssembliesAndSetupDomain (186ms)
-		LoadAssemblies (163ms)
+	RebuildCommonClasses (37ms)
+	RebuildNativeTypeToScriptingClass (13ms)
+	initialDomainReloadingComplete (64ms)
+	LoadAllAssembliesAndSetupDomain (224ms)
+		LoadAssemblies (184ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (183ms)
-			TypeCache.Refresh (181ms)
-				TypeCache.ScanAssembly (167ms)
+		AnalyzeDomain (220ms)
+			TypeCache.Refresh (217ms)
+				TypeCache.ScanAssembly (198ms)
 			BuildScriptInfoCaches (0ms)
 			ResolveRequiredComponents (1ms)
-	FinalizeReload (621ms)
+	FinalizeReload (731ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (559ms)
+		SetupLoadedEditorAssemblies (669ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (331ms)
+			InitializePlatformSupportModulesInManaged (435ms)
 			SetLoadedEditorAssemblies (5ms)
 			BeforeProcessingInitializeOnLoad (6ms)
-			ProcessInitializeOnLoadAttributes (165ms)
-			ProcessInitializeOnLoadMethodAttributes (52ms)
+			ProcessInitializeOnLoadAttributes (166ms)
+			ProcessInitializeOnLoadMethodAttributes (57ms)
 			AfterProcessingInitializeOnLoad (0ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
@@ -127,10 +127,11 @@ Domain Reload Profiling: 1079ms
 Worker process is ready to serve import requests
 Import Worker Mode flag is 0x00
 Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  1.060 seconds
-Refreshing native plugins compatible for Editor in 2.74 ms, found 3 plugins.
+- Loaded All Assemblies, in  1.377 seconds
+Refreshing native plugins compatible for Editor in 3.10 ms, found 3 plugins.
 Native extension for Android target not found
 Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 3.02 ms, found 3 plugins.
 Mono: successfully reloaded assembly
 Package Manager log level set to [2]
 [Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
@@ -139,350 +140,46 @@ Package Manager log level set to [2]
 [Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
 [Package Manager] Unable to send message (not connected to server process).
 [Package Manager] Cannot connect to Unity Package Manager local server
-- Finished resetting the current domain, in  0.826 seconds
-Domain Reload Profiling: 1876ms
-	BeginReloadAssembly (362ms)
+- Finished resetting the current domain, in  0.867 seconds
+Domain Reload Profiling: 2233ms
+	BeginReloadAssembly (555ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (6ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (36ms)
-	RebuildCommonClasses (40ms)
-	RebuildNativeTypeToScriptingClass (12ms)
-	initialDomainReloadingComplete (44ms)
-	LoadAllAssembliesAndSetupDomain (591ms)
-		LoadAssemblies (486ms)
+		CreateAndSetChildDomain (38ms)
+	RebuildCommonClasses (35ms)
+	RebuildNativeTypeToScriptingClass (13ms)
+	initialDomainReloadingComplete (48ms)
+	LoadAllAssembliesAndSetupDomain (714ms)
+		LoadAssemblies (603ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (218ms)
-			TypeCache.Refresh (171ms)
-				TypeCache.ScanAssembly (155ms)
-			BuildScriptInfoCaches (33ms)
-			ResolveRequiredComponents (11ms)
-	FinalizeReload (827ms)
+		AnalyzeDomain (220ms)
+			TypeCache.Refresh (174ms)
+				TypeCache.ScanAssembly (154ms)
+			BuildScriptInfoCaches (32ms)
+			ResolveRequiredComponents (10ms)
+	FinalizeReload (867ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (607ms)
+		SetupLoadedEditorAssemblies (622ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (27ms)
-			SetLoadedEditorAssemblies (6ms)
-			BeforeProcessingInitializeOnLoad (109ms)
-			ProcessInitializeOnLoadAttributes (409ms)
-			ProcessInitializeOnLoadMethodAttributes (45ms)
-			AfterProcessingInitializeOnLoad (11ms)
+			InitializePlatformSupportModulesInManaged (17ms)
+			SetLoadedEditorAssemblies (5ms)
+			BeforeProcessingInitializeOnLoad (134ms)
+			ProcessInitializeOnLoadAttributes (417ms)
+			ProcessInitializeOnLoadMethodAttributes (43ms)
+			AfterProcessingInitializeOnLoad (6ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
 		AwakeInstancesAfterBackupRestoration (8ms)
 Launched and connected shader compiler UnityShaderCompiler.exe after 0.01 seconds
-Refreshing native plugins compatible for Editor in 2.74 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 3.58 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 170 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 5696 unused Assets / (5.4 MB). Loaded Objects now: 6378.
-Memory consumption went from 170.4 MB to 165.0 MB.
-Total: 8.600400 ms (FindLiveObjects: 0.519300 ms CreateObjectMapping: 0.769600 ms MarkObjects: 4.859800 ms  DeleteObjects: 2.450800 ms)
-
-========================================================================
-Received Import Request.
-  Time since last request: 977135.471416 seconds.
-  path: Assets/Prefabs/Tiles/Tile2.prefab
-  artifactKey: Guid(966d2eeb0ca52e448b39563f4ebed03a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Tiles/Tile2.prefab using Guid(966d2eeb0ca52e448b39563f4ebed03a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'c4a02a73e847406308b630689d8fe476') in 0.3909809 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 712
-
-========================================================================
-Received Import Request.
-  Time since last request: 26.354588 seconds.
-  path: Assets/Prefabs/Tiles/Tile3.prefab
-  artifactKey: Guid(b7eda60b42bf33a42a3a2d0be23fb7fc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Tiles/Tile3.prefab using Guid(b7eda60b42bf33a42a3a2d0be23fb7fc) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'e928b1cadc34a0b5cabdcb1429dd9107') in 0.0369592 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 596
-
-========================================================================
-Received Import Request.
-  Time since last request: 31.191790 seconds.
-  path: Assets/Prefabs/Tiles/Tile3.prefab
-  artifactKey: Guid(b7eda60b42bf33a42a3a2d0be23fb7fc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Tiles/Tile3.prefab using Guid(b7eda60b42bf33a42a3a2d0be23fb7fc) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '6200c9d9ccb0b58775b5d6daadc9902a') in 0.0359631 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 596
-
-========================================================================
-Received Import Request.
-  Time since last request: 7.314684 seconds.
-  path: Assets/Prefabs/Tiles/Tile3.prefab
-  artifactKey: Guid(b7eda60b42bf33a42a3a2d0be23fb7fc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Tiles/Tile3.prefab using Guid(b7eda60b42bf33a42a3a2d0be23fb7fc) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '8599f5a7bef1aca74e56b04ee0b7347c') in 0.0370583 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 589
-
-========================================================================
-Received Import Request.
-  Time since last request: 15.010835 seconds.
-  path: Assets/Prefabs/Tiles/Tile3.prefab
-  artifactKey: Guid(b7eda60b42bf33a42a3a2d0be23fb7fc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Tiles/Tile3.prefab using Guid(b7eda60b42bf33a42a3a2d0be23fb7fc) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '8a9b76eda2613719f8e641ab76dad0fa') in 0.0435693 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 599
-
-========================================================================
-Received Import Request.
-  Time since last request: 8.097755 seconds.
-  path: Assets/Prefabs/Tiles/Tile3.prefab
-  artifactKey: Guid(b7eda60b42bf33a42a3a2d0be23fb7fc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Tiles/Tile3.prefab using Guid(b7eda60b42bf33a42a3a2d0be23fb7fc) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'a85df6da3d856b48ff511c9bc47def66') in 0.0388531 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 599
-
-========================================================================
-Received Import Request.
-  Time since last request: 7.877547 seconds.
-  path: Assets/Prefabs/Tiles/Tile3.prefab
-  artifactKey: Guid(b7eda60b42bf33a42a3a2d0be23fb7fc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Tiles/Tile3.prefab using Guid(b7eda60b42bf33a42a3a2d0be23fb7fc) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'd131f6193234234b19ad81d4f4dd81f9') in 0.0390321 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 592
-
-========================================================================
-Received Import Request.
-  Time since last request: 3.412712 seconds.
-  path: Assets/Prefabs/Tiles/Tile3.prefab
-  artifactKey: Guid(b7eda60b42bf33a42a3a2d0be23fb7fc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Tiles/Tile3.prefab using Guid(b7eda60b42bf33a42a3a2d0be23fb7fc) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '497ae9eec96fb5c4ee5af1136c2926f5') in 0.0387326 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 592
-
-========================================================================
-Received Import Request.
-  Time since last request: 11.090301 seconds.
-  path: Assets/Prefabs/Tiles/Tile3.prefab
-  artifactKey: Guid(b7eda60b42bf33a42a3a2d0be23fb7fc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Tiles/Tile3.prefab using Guid(b7eda60b42bf33a42a3a2d0be23fb7fc) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '3d8fe596b24b183ad639778b46a087d1') in 0.0369829 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 592
-
-========================================================================
-Received Import Request.
-  Time since last request: 17.443806 seconds.
-  path: Assets/Prefabs/Tiles/Tile4.prefab
-  artifactKey: Guid(ade586069de278c49979b1da152742bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Tiles/Tile4.prefab using Guid(ade586069de278c49979b1da152742bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'bb7a288d41127efb61a2a0922c42c72f') in 0.0320669 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 427
-
-========================================================================
-Received Import Request.
-  Time since last request: 10.681286 seconds.
-  path: Assets/Prefabs/Tiles/Tile4.prefab
-  artifactKey: Guid(ade586069de278c49979b1da152742bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Tiles/Tile4.prefab using Guid(ade586069de278c49979b1da152742bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '329753232425fa54190b332bb3707bbc') in 0.0319656 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 427
-
-========================================================================
-Received Import Request.
-  Time since last request: 5.310374 seconds.
-  path: Assets/Prefabs/Tiles/Tile4.prefab
-  artifactKey: Guid(ade586069de278c49979b1da152742bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Tiles/Tile4.prefab using Guid(ade586069de278c49979b1da152742bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'e3e288f9983e99b38eeeae28c27a6922') in 0.0359982 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 420
-
-========================================================================
-Received Import Request.
-  Time since last request: 18.881090 seconds.
-  path: Assets/Prefabs/Tiles/Tile4.prefab
-  artifactKey: Guid(ade586069de278c49979b1da152742bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Tiles/Tile4.prefab using Guid(ade586069de278c49979b1da152742bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'e790c2bb1af304f6dd5c696e8e165319') in 0.0309568 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 430
-
-========================================================================
-Received Import Request.
-  Time since last request: 2.215410 seconds.
-  path: Assets/Prefabs/Tiles/Tile4.prefab
-  artifactKey: Guid(ade586069de278c49979b1da152742bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Tiles/Tile4.prefab using Guid(ade586069de278c49979b1da152742bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '9fac9004eee1d7879705783a93d54824') in 0.0306889 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 430
-
-========================================================================
-Received Import Request.
-  Time since last request: 1.370501 seconds.
-  path: Assets/Prefabs/Tiles/Tile4.prefab
-  artifactKey: Guid(ade586069de278c49979b1da152742bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Tiles/Tile4.prefab using Guid(ade586069de278c49979b1da152742bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '38c8978478ca59f45696269df4ea5f29') in 0.0332938 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 430
-
-========================================================================
-Received Import Request.
-  Time since last request: 5.251168 seconds.
-  path: Assets/Prefabs/Tiles/Tile4.prefab
-  artifactKey: Guid(ade586069de278c49979b1da152742bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Tiles/Tile4.prefab using Guid(ade586069de278c49979b1da152742bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '374bd591a3932ac7f90d74d93013be0e') in 0.0303537 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 430
-
-========================================================================
-Received Import Request.
-  Time since last request: 6.317058 seconds.
-  path: Assets/Prefabs/Tiles/Tile4.prefab
-  artifactKey: Guid(ade586069de278c49979b1da152742bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Tiles/Tile4.prefab using Guid(ade586069de278c49979b1da152742bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '355787607d6b6a24ddae621390b6750e') in 0.0295114 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 430
-
-========================================================================
-Received Import Request.
-  Time since last request: 5.263196 seconds.
-  path: Assets/Prefabs/Tiles/Tile4.prefab
-  artifactKey: Guid(ade586069de278c49979b1da152742bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Tiles/Tile4.prefab using Guid(ade586069de278c49979b1da152742bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'de3151acf686448a2244293b83fc2fef') in 0.0305941 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 430
-
-========================================================================
-Received Import Request.
-  Time since last request: 11.201324 seconds.
-  path: Assets/Prefabs/Tiles/Tile6.prefab
-  artifactKey: Guid(7ffaa24424777544eb5490e117fc4cb7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Tiles/Tile6.prefab using Guid(7ffaa24424777544eb5490e117fc4cb7) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'bb6a3b757d1c255ef98fa89b7abb0f66') in 0.0614654 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1048
-
-========================================================================
-Received Import Request.
-  Time since last request: 13.849166 seconds.
-  path: Assets/Prefabs/Tiles/Tile6.prefab
-  artifactKey: Guid(7ffaa24424777544eb5490e117fc4cb7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Tiles/Tile6.prefab using Guid(7ffaa24424777544eb5490e117fc4cb7) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'b8db6e47d0d07d374d05a455f7c6014b') in 0.0582527 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1048
-
-========================================================================
-Received Import Request.
-  Time since last request: 39.489584 seconds.
-  path: Assets/Prefabs/Tiles/Tile6.prefab
-  artifactKey: Guid(7ffaa24424777544eb5490e117fc4cb7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Tiles/Tile6.prefab using Guid(7ffaa24424777544eb5490e117fc4cb7) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'c091391354171ab177189ea44341eaa4') in 0.0587443 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1041
-
-========================================================================
-Received Prepare
-Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.715 seconds
-Refreshing native plugins compatible for Editor in 2.62 ms, found 3 plugins.
-Native extension for Android target not found
-Native extension for WindowsStandalone target not found
-Mono: successfully reloaded assembly
-[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
-[Package Manager] Unable to send message (not connected to server process).
-[Package Manager] Cannot connect to Unity Package Manager local server
-- Finished resetting the current domain, in  0.863 seconds
-Domain Reload Profiling: 1573ms
-	BeginReloadAssembly (194ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (12ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (54ms)
-	RebuildCommonClasses (42ms)
-	RebuildNativeTypeToScriptingClass (12ms)
-	initialDomainReloadingComplete (30ms)
-	LoadAllAssembliesAndSetupDomain (432ms)
-		LoadAssemblies (372ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (144ms)
-			TypeCache.Refresh (5ms)
-				TypeCache.ScanAssembly (0ms)
-			BuildScriptInfoCaches (124ms)
-			ResolveRequiredComponents (11ms)
-	FinalizeReload (864ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (624ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (17ms)
-			SetLoadedEditorAssemblies (6ms)
-			BeforeProcessingInitializeOnLoad (131ms)
-			ProcessInitializeOnLoadAttributes (414ms)
-			ProcessInitializeOnLoadMethodAttributes (44ms)
-			AfterProcessingInitializeOnLoad (11ms)
-			EditorAssembliesLoaded (1ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (17ms)
-Refreshing native plugins compatible for Editor in 3.55 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 31 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 5693 unused Assets / (5.0 MB). Loaded Objects now: 6425.
-Memory consumption went from 156.0 MB to 151.0 MB.
-Total: 8.723800 ms (FindLiveObjects: 0.569000 ms CreateObjectMapping: 0.460100 ms MarkObjects: 5.137900 ms  DeleteObjects: 2.555700 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.684 seconds
-Refreshing native plugins compatible for Editor in 3.43 ms, found 3 plugins.
-Native extension for Android target not found
-Native extension for WindowsStandalone target not found
-Mono: successfully reloaded assembly
-[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
-[Package Manager] Unable to send message (not connected to server process).
-[Package Manager] Cannot connect to Unity Package Manager local server
-- Finished resetting the current domain, in  0.821 seconds
-Domain Reload Profiling: 1499ms
-	BeginReloadAssembly (181ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (5ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (48ms)
-	RebuildCommonClasses (30ms)
-	RebuildNativeTypeToScriptingClass (12ms)
-	initialDomainReloadingComplete (30ms)
-	LoadAllAssembliesAndSetupDomain (425ms)
-		LoadAssemblies (372ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (135ms)
-			TypeCache.Refresh (5ms)
-				TypeCache.ScanAssembly (0ms)
-			BuildScriptInfoCaches (116ms)
-			ResolveRequiredComponents (10ms)
-	FinalizeReload (821ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (604ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (21ms)
-			SetLoadedEditorAssemblies (6ms)
-			BeforeProcessingInitializeOnLoad (120ms)
-			ProcessInitializeOnLoadAttributes (402ms)
-			ProcessInitializeOnLoadMethodAttributes (44ms)
-			AfterProcessingInitializeOnLoad (11ms)
-			EditorAssembliesLoaded (0ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (16ms)
-Refreshing native plugins compatible for Editor in 2.83 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 19 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 5691 unused Assets / (4.8 MB). Loaded Objects now: 6425.
-Memory consumption went from 155.9 MB to 151.1 MB.
-Total: 8.483800 ms (FindLiveObjects: 0.622300 ms CreateObjectMapping: 0.515400 ms MarkObjects: 4.896100 ms  DeleteObjects: 2.449100 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Import Request.
-  Time since last request: 159.739246 seconds.
-  path: Assets/Prefabs/Tiles/Tile.prefab
-  artifactKey: Guid(db8f662c2e5cf114fa9474eaa99840b3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Tiles/Tile.prefab using Guid(db8f662c2e5cf114fa9474eaa99840b3) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '551e88f2a959681fc8e27922c719c1cb') in 0.3740357 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 618
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000052 seconds.
-  path: Assets/Prefabs/Tiles/Tile8.prefab
-  artifactKey: Guid(ad5f48feb80cd654e8e1b5ae0cc10bf3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Tiles/Tile8.prefab using Guid(ad5f48feb80cd654e8e1b5ae0cc10bf3) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'a732a88b0a72c21af031599d9133f369') in 0.0520251 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 617
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000044 seconds.
-  path: Assets/Prefabs/Tiles/Tile6.prefab
-  artifactKey: Guid(7ffaa24424777544eb5490e117fc4cb7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Tiles/Tile6.prefab using Guid(7ffaa24424777544eb5490e117fc4cb7) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '81491538fac0a9b0f551f4f4a60afc77') in 0.080462 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1040
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000031 seconds.
-  path: Assets/Prefabs/Tiles/Tile7.prefab
-  artifactKey: Guid(5858638a9af2b5f44907f4b0ba3eaf97) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Tiles/Tile7.prefab using Guid(5858638a9af2b5f44907f4b0ba3eaf97) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'c006ca9e91c9032c0280e7e17ebb82af') in 0.0609436 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 779
+Unloading 5718 unused Assets / (6.8 MB). Loaded Objects now: 6406.
+Memory consumption went from 169.1 MB to 162.3 MB.
+Total: 10.577000 ms (FindLiveObjects: 0.945000 ms CreateObjectMapping: 0.791100 ms MarkObjects: 5.527400 ms  DeleteObjects: 3.312100 ms)
 
 Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
 AssetImportWorker is now disconnected from the server

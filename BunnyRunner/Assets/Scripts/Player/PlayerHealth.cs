@@ -9,13 +9,17 @@ public class PlayerHealth : MonoBehaviour
     private int currentHealth;
 
     [Header("Damage Effect")]
-    [SerializeField] private GameObject damageEffectPrefab; // Prefab for damage particle effect
+    [SerializeField] private GameObject damageEffectPrefab;
+
+    [Header("UI References")]
+    public Image healthBar;
 
     private PlayerController playerController;
     private Animator anim;
     private CameraShake cameraShake;
     public GameObject gameOverPanel;
-    public Button reviveButton; // Button to trigger revive
+    public Button reviveButton;
+    private AdsManager adManager;
 
     void Start()
     {
@@ -28,11 +32,13 @@ public class PlayerHealth : MonoBehaviour
             Debug.Log("Camera shake script not found!");
         }
 
-        // Add listener to the revive button
-        if (reviveButton != null)
+        adManager = FindObjectOfType<AdsManager>();
+        if (adManager != null && reviveButton != null)
         {
-            reviveButton.onClick.AddListener(Revive);
+            reviveButton.onClick.AddListener(adManager.ShowRewardedAdRevive);
         }
+
+        UpdateHealthBar();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -50,13 +56,11 @@ public class PlayerHealth : MonoBehaviour
         if (damageEffectPrefab != null)
         {
             GameObject damageEffect = Instantiate(damageEffectPrefab, obstacle.transform.position, Quaternion.identity);
-            Destroy(damageEffect, 2f); // Destroy the particle effect after 2 seconds
+            Destroy(damageEffect, 2f);
         }
 
-        // Wait for a short duration to allow the particle effect to play
         yield return new WaitForSeconds(0.5f);
 
-        // Destroy the obstacle
         Destroy(obstacle);
     }
 
@@ -64,7 +68,8 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth--;
 
-        // Shake the camera
+        UpdateHealthBar();
+
         if (cameraShake != null)
         {
             cameraShake.ShakeCamera();
@@ -74,10 +79,8 @@ public class PlayerHealth : MonoBehaviour
             Debug.Log("Camera shake script not found!");
         }
 
-        // Check if health is depleted
         if (currentHealth <= 0)
         {
-            // Stop player movement and perform game over logic
             playerController.enabled = false;
             anim.SetTrigger("Die");
             gameOverPanel.SetActive(true);
@@ -88,33 +91,46 @@ public class PlayerHealth : MonoBehaviour
         }
         else
         {
-            // Play damage animation without stopping the player
             anim.SetTrigger("TakeDamage");
         }
     }
 
     public void Revive()
     {
-        // Restore health
         currentHealth = maxHealth;
 
-        // Re-enable player movement
+        UpdateHealthBar();
+
         playerController.enabled = true;
         anim.ResetTrigger("Die");
         anim.SetTrigger("Revive");
 
-        // Hide game over panel and revive button
         gameOverPanel.SetActive(false);
         if (reviveButton != null)
         {
             reviveButton.gameObject.SetActive(false);
         }
 
-        // Notify all enemies about the player revival
-        AIEnemy[] enemies = FindObjectsOfType<AIEnemy>();
-        foreach (AIEnemy enemy in enemies)
+        AIEnemy enemy = FindObjectOfType<AIEnemy>();
+        if (enemy == null)
+        {
+            Debug.Log("Can't access the enemy");
+        }
+        if (enemy != null)
         {
             enemy.OnPlayerRevived();
+        }
+        else
+        {
+            enemy = FindAnyObjectByType<AIEnemy>();
+        }
+    }
+
+    private void UpdateHealthBar()
+    {
+        if (healthBar != null)
+        {
+            healthBar.fillAmount = (float)currentHealth / maxHealth;
         }
     }
 

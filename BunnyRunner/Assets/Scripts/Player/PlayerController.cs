@@ -32,6 +32,13 @@ public class PlayerController : MonoBehaviour
     private AIEnemy enemyScript;
     public Button attackButton;
     private PlayerManager playerManager;
+
+    [Header("Audio")]
+    public AudioSource audioSource; // Reference to the AudioSource component
+    public AudioClip attackSound; // Sound clip for player attack
+    public AudioClip jumpSound; // Sound clip for player jump
+    public AudioClip runningSound; // Sound clip for running
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -48,6 +55,27 @@ public class PlayerController : MonoBehaviour
         {
             attackButton.onClick.AddListener(Attack);
             attackButton.gameObject.SetActive(false); // Initially set the button to be not visible
+        }
+
+        // Get the AudioSource component
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>(); // Add AudioSource if not already present
+        }
+
+        // Load the attack sound
+        if (attackSound == null)
+        {
+            Debug.LogError("Attack sound not assigned!");
+        }
+
+        // Play running sound continuously
+        if (runningSound != null)
+        {
+            audioSource.clip = runningSound;
+            audioSource.loop = true;
+            audioSource.Play();
         }
     }
 
@@ -69,6 +97,11 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if(!PlayerManager.isGameStarted)
+        {
+
+            return;
+        }
         isGrounded = controller.isGrounded;
         if (isGrounded && velocity.y < 0)
         {
@@ -78,6 +111,12 @@ public class PlayerController : MonoBehaviour
         if (SwipeManager.swipeUp && isGrounded)
         {
             Jump();
+
+            // Play jump sound
+            if (audioSource != null && jumpSound != null)
+            {
+                audioSource.PlayOneShot(jumpSound);
+            }
         }
 
         if (SwipeManager.swipeDown && !isSliding)
@@ -205,6 +244,12 @@ public class PlayerController : MonoBehaviour
         {
             anim.SetTrigger("Attacking");
             enemyScript.EnemyTakesDamage(25);
+
+            // Play attack sound
+            if (audioSource != null && attackSound != null)
+            {
+                audioSource.PlayOneShot(attackSound);
+            }
         }
     }
 
@@ -242,4 +287,3 @@ public class PlayerController : MonoBehaviour
         }
     }
 }
-

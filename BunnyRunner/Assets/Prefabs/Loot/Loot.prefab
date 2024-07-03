@@ -71,6 +71,8 @@ MonoBehaviour:
   rotationSpeed: 20
   collectEffectPrefab: {fileID: 5024009746357069194, guid: ec3f674830402cc45bce805cf6493db7,
     type: 3}
+  collectSound: {fileID: 8300000, guid: ffd67e0037550ff4abaa3d4b0dd2074d, type: 3}
+  audioSource: {fileID: 0}
 --- !u!1001 &6158310482664202697
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -151,7 +153,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7708733866348084639, guid: de5f7a7213b49714aa0cc02e551a34a4,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: e538c60ed9c9b6c4091a659f3856d7f9, type: 2}
     m_RemovedComponents: []

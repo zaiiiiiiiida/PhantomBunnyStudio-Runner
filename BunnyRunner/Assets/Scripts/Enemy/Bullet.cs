@@ -10,12 +10,16 @@ public class Bullet : MonoBehaviour
     public Vector3 impactEffectOffset = Vector3.zero; // Offset for impact effect
     public Vector3 impactEffectRotation = Vector3.zero; // Rotation for impact effect
 
+    public AudioSource audioSource; // Reference to AudioSource component
+    public AudioClip hitSound; // Sound clip for hit effect
+
     private PlayerHealth playerHealth;
 
     private void Start()
     {
         Rigidbody rb = GetComponent<Rigidbody>();
         playerHealth = FindAnyObjectByType<PlayerHealth>();
+
         if (playerHealth == null)
         {
             Debug.Log("Player health == null");
@@ -39,18 +43,32 @@ public class Bullet : MonoBehaviour
                 playerHealth.TakeDamage();
             }
 
-            // Instantiate impact effect
-            if (impactEffect != null)
-            {
-                // Calculate position and rotation for the impact effect
-                Vector3 effectPosition = transform.position + impactEffectOffset;
-                Quaternion effectRotation = Quaternion.Euler(impactEffectRotation);
+            PlayHitSound(); // Play hit sound
 
-                Instantiate(impactEffect, effectPosition, effectRotation);
-            }
+            InstantiateImpactEffect(); // Instantiate impact effect
 
-            // Destroy bullet
-            Destroy(gameObject);
+            Destroy(gameObject); // Destroy bullet
+        }
+    }
+
+    private void PlayHitSound()
+    {
+        if (audioSource != null && hitSound != null)
+        {
+            audioSource.PlayOneShot(hitSound);
+        }
+    }
+
+    private void InstantiateImpactEffect()
+    {
+        // Instantiate impact effect
+        if (impactEffect != null)
+        {
+            // Calculate position and rotation for the impact effect
+            Vector3 effectPosition = transform.position + impactEffectOffset;
+            Quaternion effectRotation = Quaternion.Euler(impactEffectRotation);
+
+            Instantiate(impactEffect, effectPosition, effectRotation);
         }
     }
 
