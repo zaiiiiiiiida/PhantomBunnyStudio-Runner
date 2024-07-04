@@ -18,6 +18,8 @@ public class ShopManager : MonoBehaviour
     public AudioClip changeSound; // Sound clip for character change
     public AudioClip backgroundMusic; // Background music clip
 
+    public GameObject particlePrefab; // Prefab of the particle effect
+
     private void Start()
     {
         audioSource = GetComponent<AudioSource>(); // Get the AudioSource component
@@ -73,6 +75,9 @@ public class ShopManager : MonoBehaviour
         }
         characters[currentCharacterIndex].SetActive(true);
 
+        // Instantiate particle effect
+        InstantiateParticleEffect();
+
         CharacterBlueprint ch = characterBlueprints[currentCharacterIndex];
         if (!ch.isUnlocked)
         {
@@ -93,6 +98,9 @@ public class ShopManager : MonoBehaviour
             currentCharacterIndex = characters.Length - 1;
         }
         characters[currentCharacterIndex].SetActive(true);
+
+        // Instantiate particle effect
+        InstantiateParticleEffect();
 
         CharacterBlueprint ch = characterBlueprints[currentCharacterIndex];
         if (!ch.isUnlocked)
@@ -144,6 +152,16 @@ public class ShopManager : MonoBehaviour
         if (audioSource != null && changeSound != null)
         {
             audioSource.PlayOneShot(changeSound);
+        }
+    }
+
+    private void InstantiateParticleEffect()
+    {
+        // Instantiate the particle effect at the position of the currently active character
+        if (particlePrefab != null && characters[currentCharacterIndex] != null)
+        {
+            GameObject particleInstance = Instantiate(particlePrefab, characters[currentCharacterIndex].transform.position, Quaternion.identity);
+            Destroy(particleInstance, 2f); // Destroy the particle effect after 2 seconds
         }
     }
 }

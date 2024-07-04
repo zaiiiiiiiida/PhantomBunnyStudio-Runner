@@ -25,7 +25,7 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth = maxHealth;
         playerController = GetComponent<PlayerController>();
-        anim = GetComponent<Animator>();
+        UpdateAnimatorReference();
         cameraShake = FindObjectOfType<CameraShake>();
         if (cameraShake == null)
         {
@@ -39,6 +39,19 @@ public class PlayerHealth : MonoBehaviour
         }
 
         UpdateHealthBar();
+    }
+
+    public void UpdateAnimatorReference()
+    {
+        // Find the currently active character and get its Animator
+        foreach (Transform child in transform)
+        {
+            if (child.gameObject.activeSelf)
+            {
+                anim = child.GetComponent<Animator>();
+                break;
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)

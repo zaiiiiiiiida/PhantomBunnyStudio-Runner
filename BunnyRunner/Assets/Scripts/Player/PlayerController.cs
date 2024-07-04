@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public float maxSpeed;
     public float lateralMoveSpeed = 10.0f;
 
-    public int desiredLane = 1; // 0:left, 1:middle, 2:right
+    public int desiredLane = 1;
     public float laneDistance = 2.5f;
 
     public float gravity = -20f;
@@ -34,48 +34,48 @@ public class PlayerController : MonoBehaviour
     private PlayerManager playerManager;
 
     [Header("Audio")]
-    public AudioSource audioSource; // Reference to the AudioSource component
-    public AudioClip attackSound; // Sound clip for player attack
-    public AudioClip jumpSound; // Sound clip for player jump
-    public AudioClip runningSound; // Sound clip for running
+    public AudioSource audioSource;
+    public AudioClip attackSound;
+    public AudioClip jumpSound;
+    public AudioClip runningSound;
 
     void Start()
     {
         controller = GetComponent<CharacterController>();
-        anim = GetComponent<Animator>();
+        UpdateAnimatorReference();
         Time.timeScale = 1.2f;
         playerManager = FindObjectOfType<PlayerManager>();
-        if (playerManager != null)
-        {
-            Debug.Log("PlayerManager is found");
-        }
 
-        // Add listener to the attack button
         if (attackButton != null)
         {
             attackButton.onClick.AddListener(Attack);
-            attackButton.gameObject.SetActive(false); // Initially set the button to be not visible
+            attackButton.gameObject.SetActive(false);
         }
 
-        // Get the AudioSource component
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)
         {
-            audioSource = gameObject.AddComponent<AudioSource>(); // Add AudioSource if not already present
+            audioSource = gameObject.AddComponent<AudioSource>();
         }
 
-        // Load the attack sound
-        if (attackSound == null)
-        {
-            Debug.LogError("Attack sound not assigned!");
-        }
-
-        // Play running sound continuously
         if (runningSound != null)
         {
             audioSource.clip = runningSound;
             audioSource.loop = true;
             audioSource.Play();
+        }
+    }
+
+    public void UpdateAnimatorReference()
+    {
+        // Find the currently active character and get its Animator
+        foreach (Transform child in transform)
+        {
+            if (child.gameObject.activeSelf)
+            {
+                anim = child.GetComponent<Animator>();
+                break;
+            }
         }
     }
 
@@ -97,9 +97,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if(!PlayerManager.isGameStarted)
+        if (!PlayerManager.isGameStarted)
         {
-
             return;
         }
         isGrounded = controller.isGrounded;
@@ -111,8 +110,6 @@ public class PlayerController : MonoBehaviour
         if (SwipeManager.swipeUp && isGrounded)
         {
             Jump();
-
-            // Play jump sound
             if (audioSource != null && jumpSound != null)
             {
                 audioSource.PlayOneShot(jumpSound);
@@ -169,19 +166,16 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        // Calculate where we should be in the future
         Vector3 targetPosition = new Vector3((desiredLane - 1) * laneDistance, transform.position.y, transform.position.z);
 
-        // Only update the X position, keep Y and Z as is
         Vector3 moveDir = (targetPosition - transform.position);
-        moveDir.y = 0; // Ensure no change in the Y axis
+        moveDir.y = 0;
 
         if (moveDir.magnitude > 0.1f)
         {
             controller.Move(moveDir.normalized * lateralMoveSpeed * Time.deltaTime);
         }
 
-        // Update the forward movement
         move = transform.forward * forwardSpeed;
         controller.Move(move * Time.deltaTime);
 
@@ -193,7 +187,6 @@ public class PlayerController : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
 
-        // Check the distance to the enemy and update attack button visibility
         if (enemyScript != null)
         {
             UpdateAttackButtonVisibility(enemyScript.playerCanAttack);
@@ -222,12 +215,10 @@ public class PlayerController : MonoBehaviour
         isSliding = false;
     }
 
-    // Method to reverse the controls
     public void ReverseControls()
     {
         isCameraReversed = !isCameraReversed;
     }
-
 
     private void UpdateAttackButtonVisibility(bool canAttack)
     {
@@ -237,7 +228,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Method to handle player attack
     public void Attack()
     {
         if (enemyScript != null && enemyScript.playerCanAttack)
@@ -245,7 +235,6 @@ public class PlayerController : MonoBehaviour
             anim.SetTrigger("Attacking");
             enemyScript.EnemyTakesDamage(25);
 
-            // Play attack sound
             if (audioSource != null && attackSound != null)
             {
                 audioSource.PlayOneShot(attackSound);
@@ -253,7 +242,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Method to update the enemy script reference
     public void SetEnemyScript(AIEnemy newEnemyScript)
     {
         enemyScript = newEnemyScript;
@@ -263,7 +251,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Method to handle enemy death
     public void OnEnemyDeath()
     {
         if (attackButton != null)
@@ -274,13 +261,10 @@ public class PlayerController : MonoBehaviour
 
     public void OnEnemyDefeated()
     {
-        // Stop player movement
         forwardSpeed = 0f;
 
-        // Trigger the "Dance" animation
         anim.SetTrigger("Dance");
 
-        // Show the winner pop-up
         if (playerManager != null)
         {
             playerManager.ShowWinnerPopup();

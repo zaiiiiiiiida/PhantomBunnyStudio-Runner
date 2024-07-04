@@ -19,14 +19,13 @@ public class PlayerManager : MonoBehaviour
     private static int totalScore;
     private int currentEarnedScore;
     public Text scoreText;
-    public Text inGameLootText;
+    public Text[] inGameLootText;
     public Text finalScoreLootText;
-    public List<Button> DoubleCarrotButtons; // Changed to List<Button>
+    public List<Button> DoubleCarrotButtons;
     public List<Text> totalScoreTextElements;
     AdsManager adManager;
-    // Background music variables
-    public AudioSource bgMusicSource; // Reference to the AudioSource component for background music
-    public AudioClip bgMusicClip; // Background music audio clip
+    public AudioSource bgMusicSource;
+    public AudioClip bgMusicClip;
 
     private void Awake()
     {
@@ -39,18 +38,16 @@ public class PlayerManager : MonoBehaviour
         totalScore = PlayerPrefs.GetInt("TotalScore", 0);
         currentEarnedScore = 0;
         Time.timeScale = 1;
-        UpdateTotalScoreUI(); // Update the UI with the loaded total score
+        UpdateTotalScoreUI();
 
-        // Initialize background music
         if (bgMusicClip != null)
         {
-            bgMusicSource = gameObject.AddComponent<AudioSource>(); // Add AudioSource if not already present
+            bgMusicSource = gameObject.AddComponent<AudioSource>();
             bgMusicSource.clip = bgMusicClip;
-            bgMusicSource.loop = true; // Loop the background music
-            bgMusicSource.Play(); // Start playing background music
+            bgMusicSource.loop = true;
+            bgMusicSource.Play();
         }
 
-        // Add event listeners to all DoubleCarrotButtons
         foreach (Button button in DoubleCarrotButtons)
         {
             if (button != null)
@@ -62,11 +59,9 @@ public class PlayerManager : MonoBehaviour
 
     void Update()
     {
-        // Update UI
         scoreText.text = currentEarnedScore.ToString();
         UpdateLootTexts();
 
-        // Game Over
         if (gameOver)
         {
             Time.timeScale = 0;
@@ -76,12 +71,11 @@ public class PlayerManager : MonoBehaviour
                 PlayerPrefs.SetInt("HighScore", currentEarnedScore);
             }
             gameOverPanel.SetActive(true);
-            SaveScore(); // Save scores when the game is over
-            LogAllSavedScores(); // Log all saved scores
+            SaveScore();
+            LogAllSavedScores();
             Destroy(gameObject);
         }
 
-        // Start Game
         if (SwipeManager.tap && !isGameStarted)
         {
             isGameStarted = true;
@@ -105,8 +99,15 @@ public class PlayerManager : MonoBehaviour
     {
         if (inGameLootText != null)
         {
-            inGameLootText.text = currentEarnedScore.ToString();
+            foreach (Text text in inGameLootText)
+            {
+                if (text != null)
+                {
+                    text.text = currentEarnedScore.ToString();
+                }
+            }
         }
+
         if (finalScoreLootText != null)
         {
             finalScoreLootText.text = currentEarnedScore.ToString();
@@ -115,7 +116,6 @@ public class PlayerManager : MonoBehaviour
 
     public void ShowWinnerPopup()
     {
-        // Set the winner panel active
         if (winnerPanel != null)
         {
             winnerPanel.SetActive(true);
@@ -133,34 +133,30 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    // Public function to calculate earned score and double it
     public void DoubleEarnedScore()
     {
         int doubledScore = currentEarnedScore * 2;
-        totalScore += doubledScore; // Add the doubled score to the total score
-        currentEarnedScore = doubledScore; // Update the current earned score to show it doubled
-        UpdateScoreUI(); // Update the UI with the new current earned score
-        UpdateTotalScoreUI(); // Update the UI with the new total score
-        Debug.Log("Doubled Earned Score: " + doubledScore); // Log for demonstration
-        SaveScore(); // Save the updated scores after doubling
+        totalScore += doubledScore;
+        currentEarnedScore = doubledScore;
+        UpdateScoreUI();
+        UpdateTotalScoreUI();
+        Debug.Log("Doubled Earned Score: " + doubledScore);
+        SaveScore();
     }
 
-    // Save scores to PlayerPrefs
     private void SaveScore()
     {
         PlayerPrefs.SetInt("TotalScore", totalScore);
         PlayerPrefs.SetInt("CurrentEarnedScore", currentEarnedScore);
-        PlayerPrefs.Save(); // Save the PlayerPrefs to disk
+        PlayerPrefs.Save();
     }
 
-    // Load scores from PlayerPrefs
     private void LoadScore()
     {
         totalScore = PlayerPrefs.GetInt("TotalScore", 0);
         currentEarnedScore = PlayerPrefs.GetInt("CurrentEarnedScore", 0);
     }
 
-    // Log all saved scores to console
     private void LogAllSavedScores()
     {
         int savedTotalScore = PlayerPrefs.GetInt("TotalScore", 0);
@@ -169,7 +165,6 @@ public class PlayerManager : MonoBehaviour
         Debug.Log($"Saved Current Earned Score: {savedCurrentEarnedScore}");
     }
 
-    // Update all Text elements in the totalScoreTextElements list with the total score
     private void UpdateTotalScoreUI()
     {
         foreach (Text textElement in totalScoreTextElements)
@@ -183,10 +178,11 @@ public class PlayerManager : MonoBehaviour
 
     public void GoToMenu()
     {
+        // Reset isGameStarted to false when going to MainMenu
+        isGameStarted = false;
         SceneManager.LoadScene("MainMenu");
     }
 
-    // Stop background music when the game is over
     private void OnDestroy()
     {
         if (bgMusicSource != null)
