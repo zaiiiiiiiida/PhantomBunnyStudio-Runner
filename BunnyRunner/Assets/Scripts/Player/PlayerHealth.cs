@@ -20,6 +20,7 @@ public class PlayerHealth : MonoBehaviour
     public GameObject gameOverPanel;
     public Button reviveButton;
     private AdsManager adManager;
+    private PlayerManager playerManager;
 
     void Start()
     {
@@ -39,6 +40,8 @@ public class PlayerHealth : MonoBehaviour
         }
 
         UpdateHealthBar();
+
+        playerManager = FindObjectOfType<PlayerManager>();
     }
 
     public void UpdateAnimatorReference()
@@ -92,7 +95,7 @@ public class PlayerHealth : MonoBehaviour
             Debug.Log("Camera shake script not found!");
         }
 
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 && !playerManager.winnerPanel.activeSelf)
         {
             playerController.enabled = false;
             anim.SetTrigger("Die");

@@ -62,7 +62,7 @@ public class PlayerManager : MonoBehaviour
         scoreText.text = currentEarnedScore.ToString();
         UpdateLootTexts();
 
-        if (gameOver)
+        if (gameOver && !winnerPanel.activeSelf)
         {
             Time.timeScale = 0;
             if (currentEarnedScore > PlayerPrefs.GetInt("HighScore", 0))
@@ -80,6 +80,12 @@ public class PlayerManager : MonoBehaviour
         {
             isGameStarted = true;
             Destroy(startingText);
+        }
+
+        // Check for R key press to reset game progress
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            ResetGameProgress();
         }
     }
 
@@ -116,7 +122,7 @@ public class PlayerManager : MonoBehaviour
 
     public void ShowWinnerPopup()
     {
-        if (winnerPanel != null)
+        if (winnerPanel != null && !gameOverPanel.activeSelf)
         {
             winnerPanel.SetActive(true);
             UnlockNewLevel();
@@ -189,5 +195,15 @@ public class PlayerManager : MonoBehaviour
         {
             bgMusicSource.Stop();
         }
+    }
+
+    private void ResetGameProgress()
+    {
+        totalScore = 0;
+        PlayerPrefs.SetInt("TotalScore", totalScore);
+        PlayerPrefs.SetInt("UnlockedLevel", 1);
+        PlayerPrefs.Save();
+        UpdateTotalScoreUI();
+        Debug.Log("Game progress has been reset.");
     }
 }

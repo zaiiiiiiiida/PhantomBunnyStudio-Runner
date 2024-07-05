@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class ShopManager : MonoBehaviour
 {
@@ -20,6 +21,12 @@ public class ShopManager : MonoBehaviour
 
     public GameObject particlePrefab; // Prefab of the particle effect
 
+    [Header("Intro Video")]
+    public VideoPlayer videoPlayer; // Reference to the VideoPlayer component
+    public GameObject videoPlayerObject; // Reference to the VideoPlayer GameObject
+    public GameObject mainMenuUI; // Reference to the main menu UI elements
+    public Button skipButton; // Reference to the skip button
+
     private void Start()
     {
         audioSource = GetComponent<AudioSource>(); // Get the AudioSource component
@@ -28,26 +35,20 @@ public class ShopManager : MonoBehaviour
             audioSource = gameObject.AddComponent<AudioSource>(); // Add AudioSource if not already present
         }
 
-        // Play background music
-        if (backgroundMusic != null)
+        // Start by playing the intro video
+        if (videoPlayer != null)
         {
-            audioSource.clip = backgroundMusic;
-            audioSource.loop = true; // Loop the background music
-            audioSource.Play();
+            videoPlayer.loopPointReached += OnVideoEnd;
+            videoPlayer.Play();
+            skipButton.onClick.AddListener(SkipVideo);
+            mainMenuUI.SetActive(false); // Hide the main menu UI while the video is playing
+        }
+        else
+        {
+            ShowMainMenu(); // If no video, directly show the main menu
         }
 
-        foreach (CharacterBlueprint characterBlueprint in characterBlueprints)
-        {
-            if (characterBlueprint.price == 0)
-            {
-                characterBlueprint.isUnlocked = true;
-            }
-            else
-            {
-                characterBlueprint.isUnlocked = PlayerPrefs.GetInt(characterBlueprint.name, 0) == 1 ? true : false;
-            }
-        }
-
+        LoadCharacterData();
         totalScore = PlayerPrefs.GetInt("TotalScore", 0);
         totalScoreText.text = totalScore.ToString();
         currentCharacterIndex = PlayerPrefs.GetInt("SelectedCharacter", 0);
@@ -61,6 +62,10 @@ public class ShopManager : MonoBehaviour
     private void Update()
     {
         UpdateUI();
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            ResetGame();
+        }
     }
 
     public void ChangeNext()
@@ -162,6 +167,81 @@ public class ShopManager : MonoBehaviour
         {
             GameObject particleInstance = Instantiate(particlePrefab, characters[currentCharacterIndex].transform.position, Quaternion.identity);
             Destroy(particleInstance, 2f); // Destroy the particle effect after 2 seconds
+        }
+    }
+
+    private void OnVideoEnd(VideoPlayer vp)
+    {
+        ShowMainMenu();
+        Destroy(videoPlayerObject); // Destroy the VideoPlayer GameObject
+    }
+
+    private void SkipVideo()
+    {
+        if (videoPlayer != null)
+        {
+            videoPlayer.Stop();
+        }
+        ShowMainMenu();
+        Destroy(videoPlayerObject); // Destroy the VideoPlayer GameObject
+    }
+
+    private void ShowMainMenu()
+    {
+        mainMenuUI.SetActive(true); // Show the main menu UI
+        skipButton.gameObject.SetActive(false); // Hide the skip button
+
+        // Play background music
+        if (backgroundMusic != null)
+        {
+            audioSource.clip = backgroundMusic;
+            audioSource.loop = true; // Loop the background music
+            audioSource.Play();
+        }
+    }
+
+    public void ResetGame()
+    {
+        PlayerPrefs.SetInt("TotalScore", 0);
+        PlayerPrefs.SetInt("SelectedCharacter", 0);
+
+        // Lock all characters except the first one
+        foreach (CharacterBlueprint characterBlueprint in characterBlueprints)
+        {
+            if (characterBlueprint.price != 0)
+            {
+                characterBlueprint.isUnlocked = false;
+                PlayerPrefs.SetInt(characterBlueprint.name, 0);
+            }
+            else
+            {
+                characterBlueprint.isUnlocked = true;
+            }
+        }
+
+        LoadCharacterData();
+        totalScore = 0;
+        totalScoreText.text = totalScore.ToString();
+        currentCharacterIndex = 0;
+        foreach (GameObject character in characters)
+        {
+            character.SetActive(false);
+        }
+        characters[currentCharacterIndex].SetActive(true);
+    }
+
+    private void LoadCharacterData()
+    {
+        foreach (CharacterBlueprint characterBlueprint in characterBlueprints)
+        {
+            if (characterBlueprint.price == 0)
+            {
+                characterBlueprint.isUnlocked = true;
+            }
+            else
+            {
+                characterBlueprint.isUnlocked = PlayerPrefs.GetInt(characterBlueprint.name, 0) == 1 ? true : false;
+            }
         }
     }
 }
