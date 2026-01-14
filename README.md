@@ -3,10 +3,8 @@
 > **High-Octane 3D Endless Runner developed by PhantomBunnyStudio.**
 > *Created under tight deadlines to deliver a premium mobile experience.*
 
-## 🎬 Gameplay Trailer
-<video src="Movie_003.mp4" width="100%" controls></video>
-> *Ecли видео не воспроизводится, попробуйте [скачать его](Movie_003.mp4)*
-<!-- Note: If viewing locally, ensure Movie_003.mp4 is in the same directory -->
+
+
 
 ## 📊 Project in Numbers (Проект в цифрах)
 
